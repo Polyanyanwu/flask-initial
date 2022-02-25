@@ -16,19 +16,19 @@ def index():
 @app.route("/about")
 def about():
     """ about us page """
-    return render_template("about.html")
+    return render_template("about.html", page_title="About")
 
 
 @app.route("/contact")
 def contact():
     """ contact us """
-    return render_template("contact.html")
+    return render_template("contact.html", page_title="Contact Us")
 
 
 @app.route("/careers")
 def careers():
     """ careers us """
-    return render_template("careers.html")
+    return render_template("careers.html", page_title="Careers")
 
 
 if __name__ == "__main__":
