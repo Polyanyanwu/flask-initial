@@ -2,10 +2,12 @@
 
 import os
 import json
-from flask import Flask, render_template, request
-
+from flask import Flask, render_template, request, flash
+if os.path.exists("env.py"):
+    import env
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 @app.route("/")
@@ -40,8 +42,10 @@ def about_member(member_name):
 def contact():
     """ contact us """
     if request.method == "POST":
-        print(request.form["name"])
-        print(request.form.get("email"))
+        flash(f"Thanks, we have received your message! {request.form.get('name')}")
+        # print(request.form["name"])
+        # print(request.form.get("email"))
+        # print(request.form.get("messag1e"))  # better to use the .get since if the key doesnt exist it will return None instead of crashing
     return render_template("contact.html", page_title="Contact Us")
 
 
