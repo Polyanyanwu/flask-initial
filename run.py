@@ -2,6 +2,7 @@
 
 import os
 import json
+import json
 from flask import Flask, render_template, request, flash
 if os.path.exists("env.py"):
     import env
@@ -60,7 +61,10 @@ def careers():
 @app.route("/maps")
 def maps():
     """ map demo """
-    return render_template("maps.html")
+    with open('static/demo_data.json', 'r', encoding="utf8") as coy_file:
+        companies = coy_file.read()
+        # print(companies)
+    return render_template("maps.html", companies=companies)
 
 
 if __name__ == "__main__":

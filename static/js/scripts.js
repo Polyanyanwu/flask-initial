@@ -41,8 +41,9 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'sk.eyJ1IjoicG9seWFueWFud3UiLCJhIjoiY2wwdjA5bm1hMHlobTNsbjVqbHBhZzJwdyJ9.0szDQLezQVYM0GGdLjlfZg'
 }).addTo(map);
-let marker = L.marker([53.26763914, -6.19930624], {title:"MICROSOFT IRELAND OPERATIONS LIMITED"}).addTo(map);
-marker = L.marker([53.27590025, -6.217248351], {title:"GOOGLE"}).addTo(map);
+// let marker = L.marker([53.26763914, -6.19930624], {title:"MICROSOFT IRELAND OPERATIONS LIMITED"}).addTo(map);
+// marker = L.marker([53.27590025, -6.217248351], {title:"GOOGLE"}).addTo(map);
+loadCompanies();
 // let popup = L.popup()
 //     .setLatLng([53.26763914, -6.19930624])
 //     .setContent("MICROSOFT IRELAND OPERATIONS LIMITED")
@@ -51,9 +52,30 @@ marker = L.marker([53.27590025, -6.217248351], {title:"GOOGLE"}).addTo(map);
 })
 
 
+function loadCompanies (){
+    const companies_json = document.querySelector("#map").dataset.companies;
+    const companies = JSON.parse(companies_json);
+    let marker;
+    for (let company of companies){
+     //   console.log(company)
+        const content =  company.organisation_name + " <br>" + company.web_address +" <br>"+ company.nace_1_label
+                        + " <br>" +company.nace_2_label + " <br>" + company.nace_3_label;
+        marker = L.marker([company.latitude, company.longitude], {title:company.organisation_name + "\n" + company.web_address}).addTo(map);
+        marker.on('click',function(e){
+            console.log("marker clicked = " + e.latlng + " content= " + content );
+            let popup = L.popup();
+            popup
+            .setLatLng(e.latlng)
+            .setContent(content)
+            .openOn(map);
+        });
+        console.log(company.latitude + " long ="+ company.longitude + " name==" + company.organisation_name + " web: " + company.web_address);
+    }
+    // console.log(companies);
+}
 
 // function onMapClick(e) {
-//     console.log(e.latlng);
+//     console.log(e.target);
 //     if(e.latlng === [53.26763914, -6.19930624]){
 //         contentName = "MICROSOFT IRELAND OPERATIONS LIMITED";
 //     }else{
@@ -66,8 +88,7 @@ marker = L.marker([53.27590025, -6.217248351], {title:"GOOGLE"}).addTo(map);
 //         .setContent(contentName)
 //         .openOn(map);
 //     }
-
-// }
+//  }
 
 
 
