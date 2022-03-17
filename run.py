@@ -57,6 +57,12 @@ def careers():
     return render_template("careers.html", page_title="Careers")
 
 
+@app.route("/maps")
+def maps():
+    """ map demo """
+    return render_template("maps.html")
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),

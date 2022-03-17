@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block metas %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-2">
+        <h2>Locations</h2>
+    </div>
+    <div class="col-10">
+        <div id="map" style="height: 480px;">
+        </div>
+    </div>
+</div>
+{% endblock %}
